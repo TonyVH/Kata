@@ -2,8 +2,8 @@ from sys import argv
 
 class Numeral:
 """
-   Program that take a command line arguement between
-   1 and 3999, and converts it to Roman Numerals
+   Program that takes an integer as a command line argument
+   between 1 and 3999, and converts it to Roman Numerals
 """
     def __init__(self):
         "Initialize list/array of Roman Numerals"
