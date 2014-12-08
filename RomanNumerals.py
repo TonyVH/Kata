@@ -1,10 +1,10 @@
 from sys import argv
 
-class Numeral:
+class Convert:
     """
-        Class that takes an integer or string of numbers between 1 and 3999 
-        as an argument, and converts it to Roman Numerals.
-        For example: Numeral_object.convert(1234) returns MCCXXXIV
+        Convert class can convert an integer or string representing an integer
+        to Roman Numerals, or convert a string of Roman Numeral to a Decimal
+        based numbering system.
     """
     def __init__(self):
         "Initialize list/array of Roman Numerals"
@@ -14,9 +14,10 @@ class Numeral:
                          ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM"],
                          ["","M","MM","MMM"]
                         ]
+        self.decimal = {"M":1000,"D":500,"C":100,"L":50,"X":10,"V":5,"I":1}
         self.range_error = "Error: Number out of range!"
 
-    def convert(self, num):
+    def toNumeral(self, num):
         "Converts an int to a Roman Numeral"
         roman_numerals = ""
         if num != str(num):
@@ -28,11 +29,26 @@ class Numeral:
                 roman_numerals += self.numerals[len(num) - (i+1)][int(num[i])]
         return roman_numerals
 
+    def toDecimal(self, numeral):
+        "Takes a Roman Numeral string as an argument"
+        total = 0
+        if len(numeral) > 1:
+            for i in range(len(numeral)-1):
+                if self.decimal.get(numeral[i], 0) < self.decimal.get(numeral[i+1], 0):
+                    total -= self.decimal.get(numeral[i], 0)
+                else:
+                    total += self.decimal.get(numeral[i], 0)
+            total += self.decimal.get(numeral[-1], 0)
+        else:
+            total += self.decimal.get(numeral, 0)
+        return total 
+
+
 
 # Test the program with a command line argument.
 def main(x):
-    n = Numeral()
-    print(n.convert(x))
+    n = Convert()
+    print(n.toDecimal(x))
 
 if __name__ == "__main__":
     main(argv[1])
