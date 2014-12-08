@@ -2,9 +2,9 @@ from sys import argv
 
 class Numeral:
     """
-        Program that takes an integer between 1 and 3999 as a 
-        command line argument, and converts it to Roman Numerals.
-        For example: $ python3 RomanNumerals 1893 == MDCCCXCIII
+        Class that takes an integer or string of numbers between 1 and 3999 
+        as an argument, and converts it to Roman Numerals.
+        For example: Numeral_object.convert(1234) returns MCCXXXIV
     """
     def __init__(self):
         "Initialize list/array of Roman Numerals"
@@ -18,18 +18,21 @@ class Numeral:
 
     def convert(self, num):
         "Converts an int to a Roman Numeral"
-        roman = ""
-        if len(str(num)) > 4 or num >= 4000:
+        roman_numerals = ""
+        if num != str(num):
+            num = str(num)
+        if len(num) > 4 or int(num) >= 4000:
             return self.range_error 
         else:
-            for i in range(len(str(num))):
-                roman += self.numerals[len(str(num)) - (i+1)][int(str(num)[i])]
-        return roman
+            for i in range(len(num)):
+                roman_numerals += self.numerals[len(num) - (i+1)][int(num[i])]
+        return roman_numerals
 
 
+# Test the program with a command line argument.
 def main(x):
     n = Numeral()
-    print(n.convert(int(x)))
+    print(n.convert(x))
 
 if __name__ == "__main__":
     main(argv[1])
